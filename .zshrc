@@ -3,6 +3,7 @@
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
+fpath+=$HOME/.zsh/pure
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -104,6 +105,8 @@ alias cls='clear'
 alias cd..='cd ..'
 alias apt='sudo apt'
 alias gh='history | grep'
+alias cat='bat'
+alias vip='vi -p'
 
 export EDITOR='nvim'
 . "$HOME/.cargo/env"
@@ -116,5 +119,7 @@ export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init --path)"
 
+# .zshrc
 autoload -U promptinit; promptinit
 prompt pure
+

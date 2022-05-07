@@ -3,7 +3,6 @@
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
-fpath+=$HOME/.zsh/pure
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -106,6 +105,9 @@ alias cd..='cd ..'
 alias apt='sudo apt'
 alias gh='history | grep'
 alias cat='bat'
+alias sl='ls'
+alias myip='curl http://ipecho.net/plain; echo'
+alias zsrc='source ~/.zshrc'
 alias vip='vi -p'
 
 export EDITOR='nvim'
@@ -119,7 +121,17 @@ export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init --path)"
 
-# .zshrc
 autoload -U promptinit; promptinit
 prompt pure
+
+PATH="/home/david/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/home/david/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/home/david/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/home/david/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/home/david/perl5"; export PERL_MM_OPT;
+
+export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
+
+eval $(thefuck --alias)
+eval $(thefuck --alias fuck)
 

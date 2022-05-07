@@ -15,6 +15,12 @@ local check_backspace = function()
   return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
 end
 
+local auto_status_ok, cmp_autopairs = pcall(require, "nvim-autopairs.completion.cmp")
+if not auto_status_ok then
+    return
+end
+
+
 --   פּ ﯟ   some other good icons
 local kind_icons = {
   Text = "",
@@ -44,6 +50,8 @@ local kind_icons = {
   TypeParameter = "",
 }
 -- find more here: https://www.nerdfonts.com/cheat-sheet
+cmp.event:on( 'confirm_done', cmp_autopairs.on_confirm_done({  map_char = { tex = '' } }))
+cmp_autopairs.lisp[#cmp_autopairs.lisp+1] = "racket"
 
 cmp.setup {
   snippet = {

@@ -19,7 +19,6 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 " Plebvim lsp Plugins
-Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/nvim-cmp'
@@ -34,6 +33,7 @@ Plug 'williamboman/nvim-lsp-installer'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'ThePrimeagen/harpoon'
+
 
 "
 Plug 'glepnir/lspsaga.nvim'
@@ -228,7 +228,7 @@ set incsearch
 set autoindent
 set smartindent
 
-set t_Co=256
+"set t_Co=256
 
 " Mouse support
 set mouse=a
@@ -265,8 +265,8 @@ let g:syntastic_python_checkers_exec = 'python3'
 
 let g:python3_host_prog = '/usr/bin/python3.8'
 
-au VimEnter,VimResume * set guicursor=n-v:block,i-ci-ve-c:ver25,r-cr:hor20,o:hor50
-  \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
-  \,sm:block-blinkwait175-blinkoff150-blinkon175
-au VimLeave,VimSuspend * set guicursor=a:block-blinkon0
+"au VimEnter,VimResume * set guicursor=n-v:block,i-ci-ve-c:ver25,r-cr:hor20,o:hor50
+"  \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
+"  \,sm:block-blinkwait175-blinkoff150-blinkon175
+"au VimLeave,VimSuspend * set guicursor=a:block-blinkon0
 

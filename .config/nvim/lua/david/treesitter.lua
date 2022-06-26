@@ -3,8 +3,23 @@ if not status_ok then
   return
 end
 
+configs.setup {
+    ensure_installed = "all",
+    sync_install = false,
+
+    highlight = {
+        enable = true,
+        additional_vim_regex_highlighting = false,
+    },
+    refactor = {
+        highlight_definitions = {
+            enable = true
+        },
+    },
+}
+
 --configs.setup {
---  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+--  ensure_installed = "yaml", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
 --  sync_install = false, -- install languages synchronously (only applied to `ensure_installed`)
 --  ignore_install = { "" }, -- List of parsers to ignore installing
 --  autopairs = {
@@ -22,35 +37,35 @@ end
 --  },
 --}
 --
-
-
-configs.setup {
-    ensure_installed = "maintained",
-    sync_install = false,
-    highlight = {
-        enable = true,
-        additional_vim_regex_highlighting = false
-    },
+--
+--
+--configs.setup {
+--    ensure_installed = "python",
+--    sync_install = false,
+--    highlight = {
+--        enable = true,
+--        additional_vim_regex_highlighting = false
+--    },
 --    incremental_selection = {
 --        enable = true,
 --        keymaps = {
 --            init_selection = "<CR>",
 --            node_incremental = "<CR>",
---            node_decremental = "<BS>",
---            scope_incremental = "<TAB>"
---        }
+----            node_decremental = "<BS>",
+----            scope_incremental = "<TAB>"
+--       }
+--   },
+--   indent = {
+--        enable = true,
+--        disable = { "python", "python3" }
 --    },
-    indent = {
-        enable = true,
-        disable = { "python", "python3" }
-    },
-    rainbow = {
-        enable = true,
-        extended_mode = true
-        -- colors = {}, -- table of hex strings
-        -- termcolors = {} -- table of colour name strings
-    },
-    context_commentstring = {
-        enable = true
-    }
-}
+--    rainbow = {
+--        enable = true,
+--        extended_mode = true,
+--        colors = {}, -- table of hex strings
+--        termcolors = {} -- table of colour name strings
+--    },
+--    context_commentstring = {
+--        enable = true
+--    }
+--}

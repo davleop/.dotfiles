@@ -135,3 +135,12 @@ export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 eval $(thefuck --alias)
 eval $(thefuck --alias fuck)
 
+#export DISPLAY=$(ip route list default | awk '{print $3}'):0
+#export DISPLAY=:0.0
+#export DISPLAY=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null):0
+export DISPLAY=192.168.80.1:0.0
+export LIBGL_ALWAYS_INDIRECT=1
+
+if [ -d $HOME/go/bin ]; then
+    export PATH="$HOME/go/bin:$PATH"
+fi

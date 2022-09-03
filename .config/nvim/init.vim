@@ -70,6 +70,7 @@ Plug 'vim-syntastic/syntastic'
 Plug 'wlangstroth/vim-racket'
 Plug 'sheerun/vim-polyglot'
 Plug 'rust-lang/rust.vim'
+Plug 'fatih/vim-go', {'do': ':GoInstallBinaries'}
 Plug 'darrikonn/vim-gofmt'
 Plug 'preservim/tagbar'
 Plug 'universal-ctags/ctags'
@@ -123,16 +124,10 @@ if !exists('g:syntax_on')
   syntax on
 endif
 
-if !exists('g:loaded_color')
-  let g:loaded_color = 1
+set background=dark
 
-  set background=dark
-  " Put your favorite colorscheme here
-  colorscheme gruvbox-baby
-  autocmd VimEnter * ++nested colorscheme gruvbox-baby
-  autocmd VimEnter * ++nested let g:gruvbox_transparent_bg=1
-  autocmd VimEnter * ++nested let g:gruvbox_contrast_dark='soft'
-endif
+colorscheme gruvbox-baby
+let g:gruvbox_baby_transparent_mode=1
 
 autocmd BufEnter * set hls
 
@@ -263,7 +258,7 @@ au BufNewFile,BufRead *.asm set filetype=nasm
 let g:syntastic_python_checkers = ['python']
 let g:syntastic_python_checkers_exec = 'python3'
 
-let g:python3_host_prog = '/usr/bin/python3.8'
+let g:python3_host_prog = '/usr/bin/python3.10'
 
 "au VimEnter,VimResume * set guicursor=n-v:block,i-ci-ve-c:ver25,r-cr:hor20,o:hor50
 "  \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor

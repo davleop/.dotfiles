@@ -47,7 +47,9 @@ local sources = {
   b.hover.dictionary,
 }
 
+
 function M.setup(opts)
+  local opts = { noremap = true, silent = true }
   nls.setup {
     -- debug = true,
     debounce = 150,

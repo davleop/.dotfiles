@@ -1,14 +1,14 @@
 {
-  "version": "4.0.85",
+  "version": "4.4.62",
   "hide_promotional_message": false,
   "beta_enabled": "No",
   "ignore_all_lsp": false,
-  "creation_time": "2022-02-11T22:03:15.817898500Z",
+  "creation_time": "2022-07-06T00:19:43.148467362Z",
   "guuid": "38b57e803fc30f6b9dbfdff2c11b3139ac58c5a15dc3aacf7757d90af8375240",
   "semantic_status": {},
   "enable_telemetry": true,
   "user_understands_that_enabling_tabnine_cloud_sends_code_to_tabnine_servers": true,
-  "deep_completions_work_mode": null,
+  "deep_completions_work_mode": "Hybrid",
   "hosted_deep_completions_enabled": "Disabled",
   "tabnine_cloud_host": null,
   "tabnine_cloud_certificate_domain": null,
@@ -26,7 +26,7 @@
   "enable_power_saving_mode": false,
   "rate_limit_interval_seconds": null,
   "rate_limit_amount": null,
-  "generation": 47,
+  "generation": 50,
   "local_model_size": null,
   "model_hash_override": null,
   "local_indexing": null,
@@ -45,6 +45,7 @@
   "empty_line_suggestions": null,
   "snippets_enabled_v2": null,
   "inline_suggestions_mode_clients": null,
-  "tabnine_hub_port": null,
-  "manually_selected_model": null
+  "tabnine_hub_port": 5555,
+  "manually_selected_model": null,
+  "hybrid_rendering_mode": null
 }

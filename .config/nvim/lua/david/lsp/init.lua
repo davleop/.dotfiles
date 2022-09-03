@@ -31,7 +31,8 @@ local function on_attach(client, bufnr)
   -- Configure for Typescript
   --if client.name == "tsserver" then
   --  require("config.lsp.ts-utils").setup(client)
-  --end
+  --en
+  local opts = { noremap = true, silent = true }
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)

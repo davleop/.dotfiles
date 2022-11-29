@@ -31,7 +31,7 @@
   "model_hash_override": null,
   "local_indexing": null,
   "heartbeat_interval_seconds": null,
-  "last_service_level": null,
+  "last_service_level": "FreeCloud",
   "override_beams": null,
   "override_context_length": null,
   "onboarding": null,

@@ -5,7 +5,7 @@
     "tabnine_cloud_host": null,
     "tabnine_cloud_certificate_domain": null,
     "tabnine_cloud_port": null,
-    "api_key": null,
+    "api_key": "MAGIC_asmcleqmcqinvdosvcoxnxoaiajdoixcmkzsqwfpjidosf",
     "jwt": null,
     "cloud_whitelist": [],
     "hosted_deep_completions_enabled": "Disabled",

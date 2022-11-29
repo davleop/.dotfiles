@@ -8,7 +8,8 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="agnoster"
+#ZSH_THEME="agnoster"
+ZSH_THEME=""
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -70,7 +71,11 @@ ZSH_THEME="agnoster"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(
+    git
+    zsh-autosuggestions
+    zsh-syntax-highlighting
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -109,6 +114,7 @@ alias sl='ls'
 alias myip='curl http://ipecho.net/plain; echo'
 alias zsrc='source ~/.zshrc'
 alias vip='vi -p'
+alias todo='find . -maxdepth 6 -type f  -exec grep --color=auto  -Hn "TODO" {} \;'
 
 export EDITOR='nvim'
 . "$HOME/.cargo/env"
@@ -117,10 +123,7 @@ export NVM_DIR="$HOME/.config"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init --path)"
-
+fpath+=($HOME/.zsh/pure)
 autoload -U promptinit; promptinit
 prompt pure
 
@@ -131,16 +134,11 @@ PERL_MB_OPT="--install_base \"/home/david/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/home/david/perl5"; export PERL_MM_OPT;
 
 export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
+export PATH=$PATH:/usr/local/go/bin
+export PATH=$PATH:$HOME/bin
+export PATH=$PATH:$HOME/.local/bin
 
 eval $(thefuck --alias)
-eval $(thefuck --alias fuck)
-
-#export DISPLAY=$(ip route list default | awk '{print $3}'):0
-#export DISPLAY=:0.0
-#export DISPLAY=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null):0
-export DISPLAY=192.168.80.1:0.0
-export LIBGL_ALWAYS_INDIRECT=1
-
-if [ -d $HOME/go/bin ]; then
-    export PATH="$HOME/go/bin:$PATH"
-fi
+# Wasmer
+export WASMER_DIR="/home/david/.wasmer"
+[ -s "$WASMER_DIR/wasmer.sh" ] && source "$WASMER_DIR/wasmer.sh"

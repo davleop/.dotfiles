@@ -251,7 +251,7 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-au BufNewFile,BufRead *.s,*.S set filetype=arm " arm = armv6/7
+au BufNewFile,BufRead *.s,*.S set filetype=asm " arm = armv6/7
 au BufNewFile,BufRead *.asm set filetype=nasm
 
 " python syntax highlighting fix

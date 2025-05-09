@@ -1,7 +1,0 @@
-gallium
-fermium
-erbium
-dubnium
-carbon
-boron
-argon

@@ -11,6 +11,10 @@
   # environment.
   home.packages = [
     pkgs.oh-my-zsh
+    pkgs.gcc
+    pkgs.pkg-config
+    pkgs.tree-sitter
+    pkgs.nodejs
   ];
 
   # Configure zsh
@@ -62,6 +66,10 @@
   home.file = {
     ".config/qtile".source = ./qtile;
     ".config/alacritty".source = ./alacritty;
+    ".config/nvim" = {
+      source = ./nvim;
+      recursive = true;
+    };
   };
 
   home.sessionVariables = {

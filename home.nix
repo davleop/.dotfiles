@@ -71,11 +71,9 @@
       source = ./nvim;
       recursive = true;
     };
-    ".tmux" = {
+    ".config/.tmux" = {
       source = ./tmux;
-      recursive = true;
     };
-    ".tmux.conf".source = ./tmux/.tmux.conf;
     ".tmux.conf.local".source = ./tmux.conf.local;
   };
 

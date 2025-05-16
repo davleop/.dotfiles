@@ -17,6 +17,9 @@ return {
     config = function()
         local autoformat_filetypes = {
             "lua",
+            "py",
+            "rs",
+            "go",
         }
         -- Create a keymap for vim.lsp.buf.implementation
         vim.api.nvim_create_autocmd('LspAttach', {
@@ -100,8 +103,19 @@ return {
         require('mason').setup({})
         require('mason-lspconfig').setup({
             ensure_installed = {
+                "rust-analyzer",
+                "rustfmt",
+                "helm-ls",
+                "html-lsp",
+                "typos-lsp",
+                "typst-lsp",
+                "typstfmt",
+                "systemd-language-server",
+                "goimports",
+                "bash-language-server",
+                "pyright",
+                "ruff",
                 "lua_ls",
-                "intelephense",
                 "ts_ls",
                 "eslint",
             },

@@ -33,6 +33,7 @@
       vip = "vi -p";
       todo = "find . -maxdepth 6 -type f  -exec grep --color=auto  -Hn \"TODO\" {} \\;";
       signout = "qtile cmd-obj -o cmd -f shutdown";
+      cat = "bat";
     };
     autosuggestion.enable = true;
     enableCompletion = true;
@@ -70,12 +71,12 @@
       source = ./nvim;
       recursive = true;
     };
-    ".tmux".source = {
-      source = ./.tmux;
+    ".tmux" = {
+      source = ./tmux;
       recursive = true;
     };
-    ".tmux.conf".source = ./.tmux/tmux.conf;
-    "tmux.conf.local".source = ./tmux.conf.local;
+    ".tmux.conf".source = ./tmux/.tmux.conf;
+    ".tmux.conf.local".source = ./tmux.conf.local;
   };
 
   home.sessionVariables = {

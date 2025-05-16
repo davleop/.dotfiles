@@ -70,6 +70,12 @@
       source = ./nvim;
       recursive = true;
     };
+    ".tmux".source = {
+      source = ./.tmux;
+      recursive = true;
+    };
+    ".tmux.conf".source = ./.tmux/tmux.conf;
+    "tmux.conf.local".source = ./tmux.conf.local;
   };
 
   home.sessionVariables = {

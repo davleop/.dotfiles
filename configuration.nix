@@ -75,6 +75,9 @@
     pulse.enable = true;
   };
 
+
+  services.ratbagd.enable = true;
+
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
 
@@ -91,12 +94,23 @@
       fzf
       bat
       tmux
+      tmux-xpanes
       ripgrep
+      flameshot
+      obs-studio
+      piper
     ];
   };
 
   programs.firefox.enable = true;
   programs.zsh.enable = true;
+
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+    localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
+  };
 
 
   # List packages installed in system profile. To search, run:
@@ -117,6 +131,7 @@
     pfetch
     google-chrome
     pciutils
+    libratbag
   ];
 
   fonts.packages = with pkgs; [

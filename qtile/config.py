@@ -47,6 +47,7 @@ keys = [
     Key([mod, "shift"], "l", lazy.layout.shuffle_right(), desc="Move window to the right"),
     Key([mod, "shift"], "j", lazy.layout.shuffle_down(), desc="Move window down"),
     Key([mod, "shift"], "k", lazy.layout.shuffle_up(), desc="Move window up"),
+
     # Grow windows. If current window is on the edge of screen and direction
     # will be to screen edge - window would shrink.
     Key([mod, "control"], "h", lazy.layout.grow_left(), desc="Grow window to the left"),
@@ -141,7 +142,7 @@ layouts = [
 
 widget_defaults = dict(
     font="JetBrains Mono",
-    fontsize=18,
+    fontsize=14,
     padding=4,
 )
 extension_defaults = widget_defaults.copy()
@@ -162,8 +163,12 @@ screens = [
                 ),
                 # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
                 # widget.StatusNotifier(),
+                widget.Sep(),
                 widget.Systray(),
-                widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
+                widget.Sep(),
+                widget.PulseVolume(),
+                widget.Sep(),
+                widget.Clock(format="%Y-%m-%d %a %H:%M"),
             ],
             24,
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders

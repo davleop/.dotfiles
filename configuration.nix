@@ -99,6 +99,8 @@
       flameshot
       obs-studio
       piper
+      zoom-us
+      typos-lsp
     ];
   };
 

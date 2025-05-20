@@ -33,7 +33,13 @@
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
+  hardware.nvidia-container-toolkit.enable = true;
   services.xserver.videoDrivers = [ "nvidia" ];
+
+  # VirtualiSATION
+  virtualisation.docker = {
+    enable = true;
+  };
 
   # Configure Networking
   networking.hostName = "tungsten"; # Define your hostname.
@@ -87,7 +93,7 @@
   users.users.david = {
     shell = pkgs.zsh;
     isNormalUser = true;
-    extraGroups = [ "wheel" ];
+    extraGroups = [ "wheel" "docker" ];
     packages = with pkgs; [
       tree
       xclip
@@ -135,6 +141,10 @@
     google-chrome
     pciutils
     libratbag
+    docker
+    docker-buildx
+    docker-compose
+    nvidia-container-toolkit
   ];
 
   fonts.packages = with pkgs; [

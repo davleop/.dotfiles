@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -7,8 +7,7 @@
   home.homeDirectory = "/home/david";
 
 
-  # The home.packages option allows you to install Nix packages into your
-  # environment.
+  # Installing some stuff for editor/shell
   home.packages = [
     pkgs.oh-my-zsh
     pkgs.gcc
@@ -63,6 +62,19 @@
     theme = "";
   };
 
+  # Configure tmux
+  programs.tmux.enable = true;
+  home.activation.ohMyTmux = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    # Clone upstream repo if missing
+    if [ ! -d "$HOME/.tmux" ]; then
+      ${lib.getExe pkgs.git} clone --single-branch https://github.com/gpakosz/.tmux.git ~/.tmux
+    fi
+    # Link main config into home
+    ln -sfn ~/.tmux/.tmux.conf ~/.tmux.conf
+    # Copy local overrides template
+  '';
+  
+
   # Home Manager is pretty good at managing dotfiles.
   home.file = {
     ".config/qtile".source = ./qtile;
@@ -71,7 +83,9 @@
       source = ./nvim;
       recursive = true;
     };
+    ".tmux.conf.local".source = ./tmux.conf.local;
   };
+
 
   home.sessionVariables = {
     EDITOR = "nvim";

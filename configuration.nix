@@ -90,6 +90,7 @@
     extraGroups = [ "wheel" ];
     packages = with pkgs; [
       tree
+      xclip
       vlc
       fzf
       bat

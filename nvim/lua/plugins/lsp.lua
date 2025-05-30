@@ -103,16 +103,7 @@ return {
         require('mason').setup({})
         require('mason-lspconfig').setup({
             ensure_installed = {
-                "rust-analyzer",
-                "rustfmt",
-                "helm-ls",
-                "html-lsp",
-                "typos-lsp",
-                "typst-lsp",
-                "typstfmt",
-                "systemd-language-server",
-                "goimports",
-                "bash-language-server",
+                "rust_analyzer",
                 "pyright",
                 "ruff",
                 "lua_ls",

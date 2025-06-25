@@ -22,6 +22,8 @@
     shellAliases = {
       nrs = "pushd $HOME/.dotfiles ; sudo nixos-rebuild switch --flake . ; popd";
       hms = "pushd $HOME/.dotfiles ; nix run home-manager/master -- switch -b backup --flake . ; popd";
+      nd = "nix develop";
+      ndi = "nix develop --impure";
       flake-update = "pushd $HOME/.dotfiles ; nix flake update ; popd";
       vi = "nvim";
       cls = "clear";

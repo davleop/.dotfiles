@@ -93,7 +93,7 @@
   users.users.david = {
     shell = pkgs.zsh;
     isNormalUser = true;
-    extraGroups = [ "wheel" "docker" ];
+    extraGroups = [ "wheel" "docker" "uucp" ];
     packages = with pkgs; [
       pamixer
       tree

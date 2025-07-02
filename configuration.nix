@@ -95,6 +95,7 @@
     isNormalUser = true;
     extraGroups = [ "wheel" "docker" ];
     packages = with pkgs; [
+      pamixer
       tree
       xclip
       vlc
@@ -141,6 +142,7 @@
     pfetch
     google-chrome
     pciutils
+    usbutils
     libratbag
     docker
     docker-buildx

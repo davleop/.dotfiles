@@ -135,6 +135,11 @@ return {
                         },
                     })
                 end,
+                rust_analyzer = function()
+                    require("lspconfig").rust_analyzer.setup({
+                        cmd = { vim.fn.exepath("rust-analyzer") },
+                    })
+                end,
             },
         })
 

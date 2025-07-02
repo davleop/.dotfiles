@@ -82,6 +82,9 @@ keys = [
     Key([mod], "b", lazy.spawn("firefox")),
     Key([mod], "f", lazy.spawn("pcmanfm")),
     Key([mod], "d", lazy.spawn("rofi -show drun")),
+    Key([], "F10", lazy.spawn("pamixer -d 5")),
+    Key([], "F11", lazy.spawn("pamixer -i 5")),
+    Key([], "F12", lazy.spawn("pamixer -t")),
 ]
 
 # Add key bindings to switch VTs in Wayland.

@@ -53,3 +53,38 @@ set.incsearch = true
 
 -- faster cursor hold
 set.updatetime = 50
+
+-- My raw vim script functions
+vim.cmd([[
+  let s:numbers = 0
+  function! HideNumbers()
+    if s:numbers
+      set number
+      set ruler
+      set relativenumber
+      let s:numbers = 0
+    else
+      set nonumber
+      set noruler
+      set norelativenumber
+      let s:numbers = 1
+    endif
+  endfun
+  command! -nargs=0 HideNumbers call HideNumbers()
+
+  function! SetTab(n)
+    let &l:tabstop=a:n
+    let &l:softtabstop=a:n
+    let &l:shiftwidth=a:n
+    set expandtab
+  endfunction
+  command! -nargs=1 SetTab call SetTab(<f-args>)
+
+  function! Trim()
+    let l:save = winsaveview()
+    keeppatterns %s/\s\+$//e
+    call winrestview(l:save)
+  endfun
+  command! -nargs=0 Trim call Trim()
+]])
+

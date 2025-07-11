@@ -75,6 +75,17 @@
     ln -sfn ~/.tmux/.tmux.conf ~/.tmux.conf
     # Copy local overrides template
   '';
+
+
+  # Setup OBS
+  programs.obs-studio = {
+    enable = true;
+    plugins = with pkgs.obs-studio-plugins; [
+      wlrobs
+      obs-backgroundremoval
+      obs-pipewire-audio-capture
+    ];
+  };
   
 
   # Home Manager is pretty good at managing dotfiles.

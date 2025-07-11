@@ -148,6 +148,8 @@
     docker-buildx
     docker-compose
     nvidia-container-toolkit
+    v4l-utils
+    pulseaudio
   ];
 
   fonts.packages = with pkgs; [

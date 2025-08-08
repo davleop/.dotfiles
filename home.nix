@@ -14,6 +14,7 @@
     pkgs.pkg-config
     pkgs.tree-sitter
     pkgs.nodejs
+    pkgs.prismlauncher
   ];
 
   # Configure zsh

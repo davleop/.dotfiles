@@ -112,6 +112,7 @@
       zoom-us
       typos-lsp
       typst
+      remmina
     ];
   };
 

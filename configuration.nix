@@ -112,7 +112,7 @@
       zoom-us
       typos-lsp
       typst
-      remmina
+      rustdesk
     ];
   };
 
@@ -153,6 +153,7 @@
     nvidia-container-toolkit
     v4l-utils
     pulseaudio
+    libreoffice
   ];
 
   fonts.packages = with pkgs; [

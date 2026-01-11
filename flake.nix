@@ -9,7 +9,9 @@
 
   outputs = { self, nixpkgs, home-manager, ... }:
   let
-    discordOverlay = (final: prev: {
+    system = "x86_64-linux";
+
+    discordOverlay = final: prev: {
       discord = prev.discord.overrideAttrs (old: rec {
         version = "0.0.104";
         src = prev.fetchurl {
@@ -17,18 +19,20 @@
           sha256 = "19rx408b5zwdishli5pdgd2as0nb91nr3shwa0j3hdfih7sh43z3";
         };
       });
-    });
+    };
+
+    overlays = [ discordOverlay ];
   in
   {
     nixosConfigurations = {
       tungsten = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
+        inherit system;
         modules = [
           ./configuration.nix
-          # Make the overlay and unfree active for the system build
+
           ({ ... }: {
             nixpkgs = {
-              overlays = [ discordOverlay ];
+              overlays = overlays;
               config.allowUnfree = true;
             };
           })
@@ -38,20 +42,15 @@
 
     homeConfigurations = {
       david = home-manager.lib.homeManagerConfiguration {
-        # keep your existing pkgs line if you want,
-        # but ensure HM sees the overlay too:
-        pkgs = nixpkgs.legacyPackages."x86_64-linux";
+        pkgs = import nixpkgs {
+          inherit system overlays;
+          config.allowUnfree = true;
+        };
+
         modules = [
           ./home.nix
-          ({ ... }: {
-            nixpkgs = {
-              overlays = [ discordOverlay ];
-              config.allowUnfree = true;
-            };
-          })
         ];
       };
     };
   };
 }
-

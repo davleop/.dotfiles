@@ -10,11 +10,19 @@
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-intel" "v4l2loopback" ];
+  boot.kernelModules = [ "kvm-intel" "v4l2loopback" "88x2bu" "rtl88xxau" ];
 
-  # For OBS
+  boot.blacklistedKernelModules = [
+    "rtl8xxxu"
+    "rtw88_usb"
+    "rtw88_8822bu"
+  ];
+
+  # For OBS and WiFi adapters
   boot.extraModulePackages = with config.boot.kernelPackages; [
     v4l2loopback
+    rtl88xxau-aircrack
+    rtl88x2bu
   ];
   boot.extraModprobeConfig = ''
     options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1

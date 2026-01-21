@@ -1,5 +1,10 @@
 { config, pkgs, lib, ... }:
-
+let
+  gef = pkgs.fetchurl {
+    url = "https://raw.githubusercontent.com/hugsy/gef/main/gef.py";
+    sha256 = "sha256-BM3+lh8ekVGTPTLPa1SNnmp2oa74snwCDFdbjUJk7SA=";
+  };
+in
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -15,6 +20,9 @@
     pkgs.tree-sitter
     pkgs.nodejs
     pkgs.prismlauncher
+
+    # Debugger + plugin host
+    pkgs.gdb
   ];
 
   # Configure zsh
@@ -98,6 +106,9 @@
       recursive = true;
     };
     ".tmux.conf.local".source = ./tmux.conf.local;
+    ".gdbinit".text = ''
+      source ${gef}
+    '';
   };
 
 

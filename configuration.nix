@@ -39,6 +39,7 @@
   services.xserver.videoDrivers = [ "nvidia" ];
 
   # VirtualiSATION
+  virtualisation.vmware.host.enable = true;
   virtualisation.docker = {
     enable = true;
   };
@@ -95,7 +96,7 @@
   users.users.david = {
     shell = pkgs.zsh;
     isNormalUser = true;
-    extraGroups = [ "wheel" "docker" "uucp" "input" ];
+    extraGroups = [ "wheel" "docker" "uucp" "input" "vmware" "kvm" ];
     packages = with pkgs; [
       pamixer
       tree
@@ -157,6 +158,14 @@
     v4l-utils
     pulseaudio
     libreoffice
+    vmware-workstation
+    ghidra
+    binwalk
+    patchelf
+    strace
+    ltrace
+    binutils
+    file
   ];
 
   fonts.packages = with pkgs; [

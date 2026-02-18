@@ -3,8 +3,11 @@
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
 { config, lib, pkgs, ... }:
-
-{
+let
+  elementForced = pkgs.writeShellScriptBin "element-desktop" ''
+    exec ${pkgs.element-desktop}/bin/element-desktop --password-store="gnome-libsecret" "$@"
+  '';
+in {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
@@ -47,6 +50,9 @@
   # Configure Networking
   networking.hostName = "tungsten"; # Define your hostname.
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  networking.extraHosts = ''
+    192.168.1.8    context.davleop.com
+  '';
 
   # Set your time zone.
   time.timeZone = "America/New_York";
@@ -65,7 +71,10 @@
     backend = "glx";
     fade = true;
   };
-  
+
+  services.gnome.gnome-keyring.enable = true;
+  security.pam.services.login.enableGnomeKeyring = true;  
+  security.pam.services.lightdm.enableGnomeKeyring = true;  
 
   # Configure keymap in X11
   # services.xserver.xkb.layout = "us";
@@ -166,6 +175,10 @@
     ltrace
     binutils
     file
+    libsecret
+    gnome-keyring
+    element-desktop
+    elementForced
   ];
 
   fonts.packages = with pkgs; [

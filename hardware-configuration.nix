@@ -21,7 +21,6 @@
   # For OBS and WiFi adapters
   boot.extraModulePackages = with config.boot.kernelPackages; [
     v4l2loopback
-    rtl88xxau-aircrack
     rtl88x2bu
   ];
   boot.extraModprobeConfig = ''

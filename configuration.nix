@@ -28,8 +28,6 @@ in {
     enable = true;
   };
 
-  hardware.opengl.enable = true;
-
   hardware.nvidia = {
     modesetting.enable = true;
     powerManagement.enable = false;    
@@ -51,7 +49,6 @@ in {
   networking.hostName = "tungsten"; # Define your hostname.
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
   networking.extraHosts = ''
-    192.168.1.8    context.davleop.com
   '';
 
   # Set your time zone.
@@ -122,7 +119,6 @@ in {
       zoom-us
       typos-lsp
       typst
-      rustdesk
     ];
   };
 
@@ -187,7 +183,7 @@ in {
     pkgs.nerd-fonts.hack
     pkgs.nerd-fonts.ubuntu
     pkgs.nerd-fonts.ubuntu-mono
-    ubuntu_font_family
+    ubuntu-classic
     font-awesome
     jetbrains-mono
     noto-fonts

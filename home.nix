@@ -24,6 +24,8 @@ in
 
     # Debugger + plugin host
     pkgs.gdb
+    pkgs.claude-code
+    pkgs.poppler-utils
   ];
 
   # Configure zsh

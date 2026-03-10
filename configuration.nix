@@ -175,6 +175,8 @@ in {
     gnome-keyring
     element-desktop
     elementForced
+    pamixer
+    htop
   ];
 
   fonts.packages = with pkgs; [
@@ -187,6 +189,8 @@ in {
     font-awesome
     jetbrains-mono
     noto-fonts
+    dejavu_fonts
+    liberation_ttf
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -219,6 +223,17 @@ in {
     dates = "weekly";
     options = "--delete-older-than 31d";
   };
+
+  nixpkgs.overlays = [
+    (self: super: {
+      qtile-unwrapped = super.qtile-unwrapped.overridePythonAttrs (old: {
+        dependencies = (old.dependencies or []) ++ (with self.python3Packages; [
+          psutil
+          dbus-python
+        ]);
+      });
+    })
+  ];
 
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.

@@ -177,6 +177,7 @@ in {
     elementForced
     pamixer
     htop
+    wireshark
   ];
 
   fonts.packages = with pkgs; [

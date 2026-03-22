@@ -20,7 +20,7 @@ in
     pkgs.tree-sitter
     pkgs.nodejs
     pkgs.prismlauncher
-    pkgs.signal-desktop-bin
+    pkgs.signal-desktop
 
     # Debugger + plugin host
     pkgs.gdb

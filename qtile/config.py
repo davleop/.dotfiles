@@ -2,7 +2,7 @@ from libqtile import bar, layout, qtile, widget, hook
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
-import subprocess
+import subprocess, os
 
 # ── Mod key & terminal ────────────────────────────────────────────────────────
 mod = "mod4"
@@ -25,7 +25,8 @@ colors = {
 }
 
 # ── Workspace groups ──────────────────────────────────────────────────────────
-groups = [Group(i) for i in "123456789"]
+# groups = [Group(i) for i in "123456789"]
+groups = [Group(i) for i in "123456789zxcvyuiop"]
 
 # ── Key bindings ──────────────────────────────────────────────────────────────
 keys = [
@@ -71,7 +72,25 @@ keys = [
     Key([], "F10", lazy.spawn("pamixer -d 5"),  desc="Vol -5"),
     Key([], "F11", lazy.spawn("pamixer -i 5"),  desc="Vol +5"),
     Key([], "F12", lazy.spawn("pamixer -t"),    desc="Vol mute"),
+
+    # Screenshot utility
+    Key([], "Print", lazy.spawn("flameshot gui")),
 ]
+
+@hook.subscribe.startup_once
+def autostart():
+    subprocess.run([
+        "xrandr",
+        "--output", "DP-0",    "--primary", "--mode", "1920x1080", "--pos", "1920x1080", "--rotate", "normal",
+        "--output", "DP-1",    "--off",
+        "--output", "HDMI-0",  "--mode", "1920x1080", "--pos", "1920x0",    "--rotate", "normal",
+        "--output", "DP-2",    "--mode", "1920x1080", "--pos", "0x1080",    "--rotate", "normal",
+        "--output", "DP-3",    "--off",
+        "--output", "DP-4",    "--mode", "1920x1080", "--pos", "3840x1080", "--rotate", "normal",
+        "--output", "DP-5",    "--off",
+        "--output", "USB-C-0", "--off",
+    ])
+
 
 # Wayland VT switching
 for vt in range(1, 8):
@@ -148,6 +167,9 @@ extension_defaults = widget_defaults.copy()
 
 screens = [
     Screen(
+        wallpaper="~/Pictures/wallpapers/default.png",
+        wallpaper_mode="fill",
+
         top=bar.Bar(
             [
                 # ── Left ──────────────────────────────────────────
@@ -219,7 +241,7 @@ screens = [
                     background=colors["bg"],
                 ),
                 widget.Net(
-                    interface="auto",   # change to e.g. "eth0" or "wlan0" if needed
+                    interface="wlp0s20f0u1",   # change to e.g. "eth0" or "wlan0" if needed
                     format="↓{down:.1f}{down_suffix} ↑{up:.1f}{up_suffix}",
                     foreground=colors["green"],
                     background=colors["bg"],
@@ -325,7 +347,21 @@ screens = [
             margin=[4, 6, 0, 6],   # gaps around bar (top, right, bottom, left)
         ),
     ),
+
+    Screen(
+        wallpaper="~/Pictures/wallpapers/default.png",
+        wallpaper_mode="fill",
+    ),
+    Screen(
+        wallpaper="~/Pictures/wallpapers/default.png",
+        wallpaper_mode="fill",
+    ),
+    Screen(
+        wallpaper="~/Pictures/wallpapers/default.png",
+        wallpaper_mode="fill",
+    ),
 ]
+
 
 
 def _vol_bar() -> str:

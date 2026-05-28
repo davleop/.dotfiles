@@ -1,16 +1,14 @@
 {
   description = "One flake to rule them all";
-
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    claude-code-nix.url = "github:sadjow/claude-code-nix";
   };
-
-  outputs = { self, nixpkgs, home-manager, ... }:
+  outputs = { self, nixpkgs, home-manager, claude-code-nix, ... }:
   let
     system = "x86_64-linux";
-
     discordOverlay = final: prev: {
       discord = prev.discord.overrideAttrs (old: rec {
         version = "0.0.104";
@@ -20,7 +18,6 @@
         };
       });
     };
-
     overlays = [ discordOverlay ];
   in
   {
@@ -29,7 +26,6 @@
         inherit system;
         modules = [
           ./configuration.nix
-
           ({ ... }: {
             nixpkgs = {
               overlays = overlays;
@@ -39,14 +35,15 @@
         ];
       };
     };
-
     homeConfigurations = {
       david = home-manager.lib.homeManagerConfiguration {
         pkgs = import nixpkgs {
           inherit system overlays;
           config.allowUnfree = true;
         };
-
+        extraSpecialArgs = {
+          claude-code-pkg = claude-code-nix.packages.${system}.claude-code;
+        };
         modules = [
           ./home.nix
         ];

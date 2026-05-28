@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, claude-code-pkg, ... }:
 let
   gef = pkgs.fetchurl {
     url = "https://raw.githubusercontent.com/hugsy/gef/main/gef.py";
@@ -10,8 +10,6 @@ in
   # manage.
   home.username = "david";
   home.homeDirectory = "/home/david";
-
-
   # Installing some stuff for editor/shell
   home.packages = [
     pkgs.oh-my-zsh
@@ -21,13 +19,11 @@ in
     pkgs.nodejs
     pkgs.prismlauncher
     pkgs.signal-desktop
-
     # Debugger + plugin host
     pkgs.gdb
-    pkgs.claude-code
+    claude-code-pkg
     pkgs.poppler-utils
   ];
-
   # Configure zsh
   programs.zsh = {
     enable = true;
@@ -51,7 +47,6 @@ in
     autosuggestion.enable = true;
     enableCompletion = true;
   };
-
   programs.zsh.plugins = [
     {
       name = "pure";
@@ -63,7 +58,6 @@ in
       };
     }
   ];
-
   programs.zsh.oh-my-zsh = {
     enable = true;
     plugins = [
@@ -75,7 +69,6 @@ in
     ];
     theme = "";
   };
-
   # Configure tmux
   programs.tmux.enable = true;
   home.activation.ohMyTmux = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
@@ -87,8 +80,6 @@ in
     ln -sfn ~/.tmux/.tmux.conf ~/.tmux.conf
     # Copy local overrides template
   '';
-
-
   # Setup OBS
   programs.obs-studio = {
     enable = true;
@@ -99,11 +90,11 @@ in
     ];
   };
   
-
   # Home Manager is pretty good at managing dotfiles.
   home.file = {
     ".config/qtile".source = ./qtile;
     ".config/alacritty".source = ./alacritty;
+    ".config/flameshot".source = ./flameshot;
     ".config/nvim" = {
       source = ./nvim;
       recursive = true;
@@ -113,14 +104,9 @@ in
       source ${gef}
     '';
   };
-
-
   home.sessionVariables = {
     EDITOR = "nvim";
   };
-
-
-
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
   home.stateVersion = "24.11";

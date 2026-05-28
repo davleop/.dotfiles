@@ -7,6 +7,10 @@ let
   elementForced = pkgs.writeShellScriptBin "element-desktop" ''
     exec ${pkgs.element-desktop}/bin/element-desktop --password-store="gnome-libsecret" "$@"
   '';
+    pinnedPkgs = import (fetchTarball {
+        url = "https://github.com/NixOS/nixpkgs/archive/a3ed7406349a9335cb4c2a71369b697cecd9d351.tar.gz";
+        sha256 = "sha256:1qmbd98ywmywsacr7b4b17k7pyvmhmlq1avci92ahwx1frq00g1w";
+      }) { system = "x86_64-linux"; config.allowUnfree = true; };
 in {
   imports =
     [ # Include the results of the hardware scan.
@@ -113,7 +117,7 @@ in {
       tmux
       tmux-xpanes
       ripgrep
-      flameshot
+      pinnedPkgs.flameshot
       obs-studio
       piper
       zoom-us
@@ -178,6 +182,7 @@ in {
     pamixer
     htop
     wireshark
+    xdotool
   ];
 
   fonts.packages = with pkgs; [

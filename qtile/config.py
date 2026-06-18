@@ -61,6 +61,7 @@ keys = [
     # Qtile control
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload config"),
     Key([mod, "control"], "q", lazy.shutdown(),      desc="Quit Qtile"),
+    Key([mod], "l", lazy.spawn("i3lock -c 1d2021")),
 
     # App launchers
     Key([mod], "b", lazy.spawn("firefox"),           desc="Browser"),
@@ -69,12 +70,14 @@ keys = [
     Key([mod], "r", lazy.spawncmd(),                 desc="Run prompt"),
 
     # Volume — scroll on the bar widget also works
+    Key([], "F9", lazy.spawn("playerctl play-pause"),  desc="Play/Pause"),
     Key([], "F10", lazy.spawn("pamixer -d 5"),  desc="Vol -5"),
     Key([], "F11", lazy.spawn("pamixer -i 5"),  desc="Vol +5"),
     Key([], "F12", lazy.spawn("pamixer -t"),    desc="Vol mute"),
 
     # Screenshot utility
     Key([], "Print", lazy.spawn("flameshot gui")),
+
 ]
 
 @hook.subscribe.startup_once

@@ -12,6 +12,7 @@ in
   home.homeDirectory = "/home/david";
   # Installing some stuff for editor/shell
   home.packages = [
+    pkgs.i3lock
     pkgs.oh-my-zsh
     pkgs.gcc
     pkgs.pkg-config
@@ -19,7 +20,7 @@ in
     pkgs.nodejs
     pkgs.prismlauncher
     pkgs.signal-desktop
-    # Debugger + plugin host
+    pkgs.playerctl
     pkgs.gdb
     claude-code-pkg
     pkgs.poppler-utils
@@ -107,6 +108,13 @@ in
   home.sessionVariables = {
     EDITOR = "nvim";
   };
+
+  services.screen-locker = {
+    enable = true;
+    inactiveInterval = 20; # minutes of inactivity before it locks
+    lockCmd = "${pkgs.i3lock}/bin/i3lock -c 1d2021";
+  };
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
   home.stateVersion = "24.11";

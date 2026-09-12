@@ -106,7 +106,7 @@ in {
   users.users.david = {
     shell = pkgs.zsh;
     isNormalUser = true;
-    extraGroups = [ "wheel" "docker" "uucp" "input" "vmware" "kvm" ];
+    extraGroups = [ "wheel" "docker" "uucp" "input" "vmware" "kvm" "dialout" ];
     packages = with pkgs; [
       pamixer
       tree
@@ -123,6 +123,8 @@ in {
       zoom-us
       typos-lsp
       typst
+      freecad
+      prusa-slicer
     ];
   };
 

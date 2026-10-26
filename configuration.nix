@@ -58,12 +58,30 @@ in {
   # Set your time zone.
   time.timeZone = "America/New_York";
 
+  systemd.targets.sleep.enable = false;
+  systemd.targets.suspend.enable = false;
+  systemd.targets.hibernate.enable = false;
+  systemd.targets.hybrid-sleep.enable = false;
+
   services.xserver = {
     enable = true;
-    windowManager.qtile.enable = true;
+    windowManager.qtile = {
+      enable = true;
+      # qtile 0.37 renamed its session file to qtile-generic.desktop, but the
+      # package still advertises providedSessions = [ "qtile" ], which fails the
+      # displayManager session validation. Point it at the real file name.
+      package = pkgs.python3Packages.qtile.overrideAttrs (old: {
+        passthru = (old.passthru or { }) // { providedSessions = [ "qtile-generic" ]; };
+      });
+    };
     displayManager.sessionCommands = ''
       xwallpaper --zoom ~/Pictures/wallpapers/default.png
       xset r rate 200 35 &
+      # Keep the system (and network/SSH) running, but let the displays sleep.
+      # DPMS: standby/suspend/off all after 600s (10 min).
+      xset +dpms
+      xset dpms 600 600 600
+      xset s 600 600
     '';
   };
 
@@ -123,7 +141,8 @@ in {
       zoom-us
       typos-lsp
       typst
-      freecad
+      pinnedPkgs.freecad # ifcopenshell fails to compile vs boost 1.91 in current nixpkgs; use pinned build
+
       prusa-slicer
     ];
   };
@@ -156,7 +175,7 @@ in {
     git
     spotify
     discord
-    tokyonight-gtk-theme
+    catppuccin-gtk # tokyonight-gtk-theme removed from nixpkgs (GTK2 dep unmaintained); Mocha is the closest dark look
     pfetch
     google-chrome
     pciutils

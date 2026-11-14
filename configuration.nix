@@ -15,6 +15,7 @@ in {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./rtl8188gu.nix
     ];
 
 
@@ -234,6 +235,8 @@ in {
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+  services.openssh.settings.X11Forwarding = true;
+  services.openssh.settings.AddressFamily = "inet";
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

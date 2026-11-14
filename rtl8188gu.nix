@@ -12,6 +12,12 @@
 # (so depmod registers its modalias) but is NOT force-loaded via
 # boot.kernelModules. udev autoloads it on demand only when the dongle is
 # present, so boot never depends on it and an absent dongle is a no-op.
+#
+# SCOPE: this makes the dongle enumerate and appear in `ip a`. Actual monitor
+# capture does NOT work on kernel 6.18 — the interface bring-up is vetoed at
+# the cfg80211/kernel layer before the driver's open runs, so the radio never
+# fully initialises. See docs/adr in the driver repo (/home/david/repos/lumi/
+# rtl8188gu). For real monitor/injection, use an MT7612U or RTL8812AU adapter.
 { config, lib, pkgs, ... }:
 let
   rtl8188gu = config.boot.kernelPackages.callPackage (
@@ -75,6 +81,18 @@ let
         substituteInPlace os_dep/linux/usb_intf.c \
           --replace-quiet '{USB_DEVICE_AND_INTERFACE_INFO(USB_VENDER_ID_REALTEK, 0x2005, 0xff, 0xff, 0xff), .driver_info = RTL8710B}, /* TOTOLINK N150UA-B, 8188GU 1*1 */' '{USB_DEVICE_AND_INTERFACE_INFO(USB_VENDER_ID_REALTEK, 0x2005, 0xff, 0xff, 0xff), .driver_info = RTL8710B}, /* TOTOLINK N150UA-B, 8188GU 1*1 */
 	{USB_DEVICE_AND_INTERFACE_INFO(0x3625, 0x010D, 0xff, 0xff, 0xff), .driver_info = RTL8710B},'
+
+        # Kernel 5.17 made netdev->dev_addr const; drivers must use
+        # eth_hw_addr_set() instead of writing it directly, or dev_addr_check()
+        # WARNs and aborts __dev_open. Convert all six direct writes.
+        substituteInPlace os_dep/linux/os_intfs.c \
+          --replace-quiet '_rtw_memcpy((void *)ndev->dev_addr, adapter_mac_addr(adapter), ETH_ALEN);' 'eth_hw_addr_set(ndev, adapter_mac_addr(adapter));' \
+          --replace-quiet '_rtw_memcpy(pnetdev->dev_addr, adapter_mac_addr(padapter), ETH_ALEN);' 'eth_hw_addr_set(pnetdev, adapter_mac_addr(padapter));' \
+          --replace-quiet '_rtw_memcpy((void *)pnetdev->dev_addr, sa->sa_data, ETH_ALEN);' 'eth_hw_addr_set(pnetdev, sa->sa_data);'
+        substituteInPlace os_dep/linux/mlme_linux.c \
+          --replace-quiet '_rtw_memcpy(pnetdev->dev_addr, mac, ETH_ALEN);' 'eth_hw_addr_set(pnetdev, mac);'
+        substituteInPlace os_dep/linux/ioctl_linux.c \
+          --replace-quiet '_rtw_memcpy(padapter->pnetdev->dev_addr, get_hal_mac_addr(padapter), ETH_ALEN);' 'eth_hw_addr_set(padapter->pnetdev, get_hal_mac_addr(padapter));'
       '';
       makeFlags = [
         "ARCH=x86_64"

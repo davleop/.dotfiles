@@ -190,6 +190,7 @@ in {
     v4l-utils
     pulseaudio
     libreoffice
+    # (blender.override { cudaSupport = true; })
     vmware-workstation
     ghidra
     binwalk
@@ -206,6 +207,7 @@ in {
     htop
     wireshark
     xdotool
+    iw
   ];
 
   fonts.packages = with pkgs; [

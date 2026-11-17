@@ -27,6 +27,10 @@ in {
   boot.loader.grub.device = "/dev/nvme0n1";
   boot.supportedFilesystems = [ "ntfs" ];
 
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = false;
+  };
 
   # Configure GPU
   hardware.graphics = {
@@ -126,7 +130,7 @@ in {
   users.users.david = {
     shell = pkgs.zsh;
     isNormalUser = true;
-    extraGroups = [ "wheel" "docker" "uucp" "input" "vmware" "kvm" "dialout" ];
+    extraGroups = [ "wheel" "docker" "uucp" "input" "vmware" "kvm" "dialout" "wireshark" ];
     packages = with pkgs; [
       pamixer
       tree
@@ -158,6 +162,8 @@ in {
     dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
     localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
   };
+
+  programs.wireshark.enable = true;
 
 
   programs.direnv.enable = true;
@@ -205,8 +211,8 @@ in {
     elementForced
     pamixer
     htop
-    wireshark
     xdotool
+    wireshark
     iw
   ];
 
